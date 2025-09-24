@@ -1,0 +1,23 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %}
+    Logged Out
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm text-center">
+                <div class="card-header bg-success text-white">
+                    <h4>Logged Out</h4>
+                </div>
+                <div class="card-body">
+                    <p class="lead">You have logged out successfully.</p>
+                    <a href="{% url 'workshop_app:login' %}" class="btn btn-primary mt-3">Login Again</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

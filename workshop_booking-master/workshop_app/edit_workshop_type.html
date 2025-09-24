@@ -1,0 +1,85 @@
+{% extends 'workshop_app/base.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Workshop Type
+{% endblock %}
+
+{% block extra-custom-scripts %}
+    <script src="{% static 'workshop_app/js/jquery.formset.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h4>View / Edit Workshop Type</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Workshop fields -->
+                {% for field in form %}
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label font-weight-bold">{{ field.label_tag }}</label>
+                        <div class="col-md-9">
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- Attachments -->
+                <h5 class="mt-4 mb-3 text-center">Attachments</h5>
+                {{ form_file.management_form }}
+                {{ form_file.non_form_errors }}
+
+                {% for form in form_file %}
+                    <div class="inline {{ form_file.prefix }} my-3 p-3 border rounded shadow-sm">
+                        <div class="row align-items-center">
+                            <div class="col-md-11">
+                                {% for field in form %}
+                                    <div class="form-group">
+                                        {{ field }}
+                                        {% for error in field.errors %}
+                                            <div class="text-danger small">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {% if form.id.value %}
+                                <div class="col-md-1 text-right">
+                                    <a href="{% url 'workshop_app:delete_attachment_file' form.id.value %}" class="btn btn-danger btn-sm">Delete</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="text-right mt-3">
+                    <button type="submit" class="btn btn-success px-4">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".inline.{{ form_file.prefix }}").formset({
+            prefix: "{{ form_file.prefix }}",
+            addCssClass: "btn btn-primary mt-2",
+            deleteCssClass: "hidden",
+            addText: 'Add another attachment',
+            deleteText: '',
+            formCssClass: 'inline-form'
+        });
+    });
+</script>
+{% endblock %}

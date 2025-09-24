@@ -1,0 +1,134 @@
+/* ---------------------------
+   GLOBAL STYLES
+--------------------------- */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #f8d210 !important;
+}
+
+/* ---------------------------
+   NAVBAR
+--------------------------- */
+.navbar {
+    background: linear-gradient(90deg, #0d0d0d, #1a1a1a);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #f8d210 !important;
+    letter-spacing: 1px;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #f8f9fa !important;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f8d210 !important;
+    transform: translateY(-2px);
+}
+
+/* ---------------------------
+   HERO SECTION
+--------------------------- */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('../images/hero-bg.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 120px 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.hero .btn {
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    transform: scale(1.05);
+    background-color: #f8c400;
+    border-color: #f8c400;
+}
+
+/* ---------------------------
+   FOOTER
+--------------------------- */
+footer {
+    background: #111;
+    padding: 30px 15px;
+}
+
+footer .container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+footer a {
+    color: #ddd;
+    margin: 0 12px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #f8d210;
+}
+
+footer .fab {
+    transition: transform 0.3s ease;
+}
+
+footer .fab:hover {
+    transform: scale(1.2);
+    color: #f8d210;
+}
+
+footer p, footer small {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* ---------------------------
+   ANIMATIONS
+--------------------------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

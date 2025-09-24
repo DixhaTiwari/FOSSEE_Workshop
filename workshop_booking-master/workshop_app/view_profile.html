@@ -1,0 +1,111 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    {% if Workshops %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0 text-center">Coordinator Profile</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>First Name</th>
+                        <td>{{ coordinator_profile.user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Name</th>
+                        <td>{{ coordinator_profile.user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ coordinator_profile.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Institute</th>
+                        <td>{{ coordinator_profile.user.profile.institute }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>{{ coordinator_profile.user.profile.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Department</th>
+                        <td>{{ coordinator_profile.user.profile.department }}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{ coordinator_profile.user.profile.location }}</td>
+                    </tr>
+                    <tr>
+                        <th>Position</th>
+                        <td>{{ coordinator_profile.user.profile.position }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0 text-center">Workshop Details</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Instructor Name</th>
+                            <th>Workshop Date</th>
+                            <th>Workshop Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for workshop in Workshops %}
+                            <tr>
+                                {% if workshop.instructor %}
+                                    <td>{{ workshop.instructor }}</td>
+                                {% else %}
+                                    <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                {% endif %}
+                                <td>{{ workshop.date }}</td>
+                                <td>{{ workshop.workshop_type }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h4 class="mb-0 text-center">Update Your Profile</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <h5 class="text-center font-weight-bold">Please fix the errors below:</h5>
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+
+                    {% for field in form %}
+                        <div class="mb-3">
+                            {{ field.label_tag }}{% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Update</button>
+                    <a href="{% url 'workshop_app:index' %}" class="btn btn-primary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

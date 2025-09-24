@@ -1,0 +1,54 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %}
+    Add New Workshop Type
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h4>New Workshop Type</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <!-- Workshop Name -->
+                <div class="form-group">
+                    <label class="font-weight-bold">Workshop Name</label>
+                    {{ form.name }}
+                    <div class="text-danger small">{{ form.name.errors }}</div>
+                </div>
+
+                <!-- Duration -->
+                <div class="form-group">
+                    <label class="font-weight-bold">Duration</label>
+                    {{ form.duration }}
+                    <small class="form-text text-muted">{{ form.duration.help_text }}</small>
+                    <div class="text-danger small">{{ form.duration.errors }}</div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="font-weight-bold">Description</label>
+                    {{ form.description }}
+                    <div class="text-danger small">{{ form.description.errors }}</div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-group">
+                    <label class="font-weight-bold">Terms and Conditions</label>
+                    {{ form.terms_and_conditions }}
+                    <div class="text-danger small">{{ form.terms_and_conditions.errors }}</div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-right">
+                    <button type="submit" class="btn btn-success px-4">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

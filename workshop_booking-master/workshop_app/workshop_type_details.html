@@ -1,0 +1,38 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %}
+    Workshop Details
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0 text-center">Workshop Details</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between">
+                <strong>Workshop Name:</strong>
+                <span>{{ workshop_type.name }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <strong>Duration:</strong>
+                <span>{{ workshop_type.duration }} day(s)</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <strong>Description:</strong>
+                <span>{{ workshop_type.description }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <strong>Terms and Conditions:</strong>
+                <span>{{ workshop_type.terms_and_conditions }}</span>
+            </li>
+        </ul>
+        <div class="card-body text-center">
+            <a href="{% url 'workshop_app:workshop_types' %}" class="btn btn-primary">Back to Workshop Types</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

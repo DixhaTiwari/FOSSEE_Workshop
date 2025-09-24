@@ -1,0 +1,47 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %}
+    Awaiting Activation
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    {% if status == '2' %}
+        <div class="alert alert-info text-center shadow-sm p-4 rounded">
+            <p>Your email is already verified. Click
+                <a href="{% url 'workshop_app:index' %}" class="btn btn-primary btn-sm ml-2">Go to Home</a>
+            </p>
+        </div>
+
+    {% elif status == '1' %}
+        <script>
+            setTimeout(function () {
+                location.href = "{% url 'workshop_app:register' %}"
+            }, 3000);
+        </script>
+        <div class="alert alert-danger text-center shadow-sm p-4 rounded">
+            <p>Your activation has expired. Please register again.</p>
+        </div>
+
+    {% elif status == '0' %}
+        <div class="alert alert-success text-center shadow-sm p-4 rounded">
+            <p>Your account has been activated. Click
+                <a href="{% url 'workshop_app:index' %}" class="btn btn-success btn-sm ml-2">Go to Home</a>
+            </p>
+        </div>
+
+    {% else %}
+        <script>
+            setTimeout(function () {
+                location.href = "{% url 'workshop_app:logout' %}"
+            }, 5000);
+        </script>
+        <div class="card shadow-sm p-4 text-center">
+            <h3 class="text-warning">Activation Awaiting</h3>
+            <p>The activation link has been sent to your email.  
+            It will expire in <strong>24 hours</strong> from registration.  
+            You will be logged out automatically.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
